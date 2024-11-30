@@ -1,0 +1,114 @@
+package Views;
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
+public class RegistroClienteForm extends JFrame {
+
+    public RegistroClienteForm() {
+        setTitle("Registro de Cliente");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 300);
+        setLocationRelativeTo(null);
+
+        // Configuración de GridBagLayout
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // Etiqueta y campo de texto para Nombre
+        JLabel nombreLabel = new JLabel("Nombre:");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(nombreLabel, gbc);
+
+        JTextField nombreField = new JTextField(50);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        add(nombreField, gbc);
+
+        // Etiqueta y campo de texto para Cédula
+        JLabel cedulaLabel = new JLabel("Cédula:");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(cedulaLabel, gbc);
+
+        JTextField cedulaField = new JTextField(50);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        add(cedulaField, gbc);
+
+        // Etiqueta y campo de texto para Dirección
+        JLabel direccionLabel = new JLabel("Dirección:");
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(direccionLabel, gbc);
+
+        JTextField direccionField = new JTextField(50);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        add(direccionField, gbc);
+
+        // Etiqueta y botón de radio para Disponibilidad de Horario
+        JLabel disponibilidadLabel = new JLabel("Disponibilidad de Horario:");
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        add(disponibilidadLabel, gbc);
+
+        JPanel disponibilidadPanel = new JPanel();
+        JRadioButton disponibleSi = new JRadioButton("Sí");
+        JRadioButton disponibleNo = new JRadioButton("No");
+        ButtonGroup disponibilidadGroup = new ButtonGroup();
+        disponibilidadGroup.add(disponibleSi);
+        disponibilidadGroup.add(disponibleNo);
+        disponibilidadPanel.add(disponibleSi);
+        disponibilidadPanel.add(disponibleNo);
+
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        add(disponibilidadPanel, gbc);
+
+        // Botón de Guardar
+        JButton guardarButton = new JButton("Guardar");
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(guardarButton, gbc);
+
+        // Acción del botón Guardar
+        guardarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombre = nombreField.getText();
+                String cedula = cedulaField.getText();
+                String direccion = direccionField.getText();
+                String disponibilidad = disponibleSi.isSelected() ? "Sí" : "No";
+
+                // Aquí puedes agregar la lógica para guardar los datos o mostrar un mensaje
+                JOptionPane.showMessageDialog(null, "Cliente guardado:\nNombre: " + nombre + "\nCédula: " + cedula + "\nDirección: " + direccion + "\nDisponibilidad: " + disponibilidad);
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            RegistroClienteForm form = new RegistroClienteForm();
+            form.setVisible(true);
+        });
+    }
+}
